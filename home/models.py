@@ -1,4 +1,4 @@
-
+from django.contrib.auth.models import User
 from django.db import models 
 from users.models import Teacher
 # specifying choices 
@@ -60,3 +60,16 @@ class News(models.Model):
         except:
             url = ''
         return url
+    
+class Post(models.Model):
+    comment = models.TextField()
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=50, null=True, blank=True)
+    subject = models.CharField(max_length=50, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        
+    def __str__(self):
+        return self.name

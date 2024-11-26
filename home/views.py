@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Subject, Category, Degrees, News
 from users.models import Teacher
 from django.db.models import Q
 from .utils import paginateProducts
+from .models import Post
 # Create your views here.
 def home(request):
     subjects = Subject.objects.all()
@@ -73,8 +74,21 @@ def feature(request):
     return render(request, 'feature.html')
 
 def contact(request):
-
-    return render(request, 'contact.html')
+    
+    if request.method == 'POST': 
+        name = request.POST.get('name') 
+        email = request.POST.get('email') 
+        subject = request.POST.get('subject')
+        comment = request.POST.get('comment')
+ 
+        # Save to database 
+        if name and email: 
+            contact = Post(name=name, email=email, subject=subject, comment=comment) 
+            contact.save() 
+            return redirect('contact') 
+    
+    context = {}
+    return render(request, 'contact.html', context)
 
 def team(request):
 
