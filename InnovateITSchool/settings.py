@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-p^nm6+fieoq+q76u%)3e=4wdf=^)-vgqj5q3qxj_1(#sbj&g76
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
@@ -72,7 +72,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'InnovateITSchool.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
