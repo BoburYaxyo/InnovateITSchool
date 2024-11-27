@@ -25,7 +25,7 @@ class Duration(models.Model):
 class Subject(models.Model):
     name = models.CharField(max_length=150)
     degree = models.ForeignKey(Degrees, on_delete=models.SET_NULL, null=True)
-    teacher = models.OneToOneField(Teacher, on_delete=models.SET_NULL, null=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.SET_NULL, null=True)
     image = models.ImageField(upload_to='images/', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     duration = models.ForeignKey(Duration, on_delete=models.SET_NULL, null=True)

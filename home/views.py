@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Subject, Category, Degrees, News
-from users.models import Teacher
+from users.models import Teacher, Student
 from django.db.models import Q
 from .utils import paginateProducts
 from .models import Post
@@ -12,12 +12,37 @@ def home(request):
     te_count =teachers.count()
     degrees = Degrees.objects.all()
     de_count = degrees.count()
+    if request.method == 'POST': 
+        name = request.POST.get('name') 
+        email = request.POST.get('email') 
+        subject = request.POST.get('subject')
+        comment = request.POST.get('comment')
+ 
+        # Save to database 
+        if name and email: 
+            contact = Post(name=name, email=email, subject=subject, comment=comment) 
+            contact.save() 
+            return redirect('contact') 
     
+    if request.method == 'POST': 
+        full_name = request.POST.get('full_name') 
+        tel_raqami = request.POST.get('tel_raqami') 
+        maktabi = request.POST.get('maktabi')
+        sinfi = request.POST.get('sinfi')
+ 
+        # Save to database 
+        if full_name and tel_raqami: 
+            user = Student(full_name=full_name, tel_raqam=tel_raqami, maktabi=maktabi, sinfi=sinfi) 
+            user.save() 
+            return redirect('home') 
+    posts = Post.objects.all()
     context={
         'subjects':subjects,
         'sub_count':sub_count,
         'te_count':te_count,
         'de_count':de_count,
+        'posts':posts,
+        'teachers': teachers,
     }
     return render(request, 'home.html', context)
 

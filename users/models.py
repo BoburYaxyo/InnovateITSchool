@@ -12,6 +12,19 @@ SKILLS_CHOICES = (
     ("7", "Chinese"), 
     ("8", "Kind"), 
 ) 
+CLASSES_CHOICES = ( 
+    ("1", "1-Sinf"), 
+    ("2", "2-Sinf"), 
+    ("3", "3-Sinf"), 
+    ("4", "4-Sinf"), 
+    ("5", "5-Sinf"), 
+    ("6", "6-Sinf"), 
+    ("7", "7-Sinf"), 
+    ("8", "8-Sinf"), 
+    ("9", "9-Sinf"),
+    ("10", "10-Sinf"),
+    ("11", "11-Sinf"),
+) 
 
 class Teacher(models.Model):
     name = models.CharField(max_length=150)
@@ -26,5 +39,16 @@ class Teacher(models.Model):
     
     def __str__(self):
         return self.name
+
+
+
+class Student(models.Model):
+    full_name = models.CharField(max_length=50, null=True)
+    sinfi = models.CharField(max_length = 50, null=True)
+    maktabi = models.CharField(max_length=50, null=True)
+    tel_raqam = models.CharField(max_length=20, null=True)
     
+    def __str__(self):
+        return self.full_name
+
     
